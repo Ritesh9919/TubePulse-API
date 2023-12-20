@@ -7,7 +7,8 @@ import {
     refreshAccessToken,
     changePassword,
     getCurrentUser,
-    updateAccountDetails
+    updateAccountDetails,
+    updateUserAvatar
  } from '../controllers/user.controller.js';
 
 
@@ -30,7 +31,8 @@ router.get('/logout', varifyJwt, logoutUser);
 router.post('/refresh-token', refreshAccessToken);
 router.post('/change-password', varifyJwt, changePassword );
 router.get('/current-user', varifyJwt, getCurrentUser);
-router.put('/account-details', varifyJwt, updateAccountDetails);
+router.put('/update-account-details', varifyJwt, updateAccountDetails);
+router.put('/update-avatar', varifyJwt, upload.single('avatar'), updateUserAvatar);
 
 
 export default router;
