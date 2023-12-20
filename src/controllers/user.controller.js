@@ -229,6 +229,26 @@ const updateUserAvatar = asyncHandler(async(req, res)=> {
 
 
 
+const updateUserCoverImage = asyncHandler(async(req, res)=> {
+  const coverImageLocalPath = 'temp/' + req.file.filename;
+
+  console.log(coverImageLocalPath);
+
+  if(!coverImageLocalPath) {
+    throw new ApiError(400, 'coverImage file is required');
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    {$set:{coverImage:coverImageLocalPath}},
+    {new: true}
+  ).select('-password')
+
+  return res.status(200)
+  .json(new ApiResponse(200, user, 'User coverImage updated successfully'));
+})
+
+
 
 
 
@@ -247,6 +267,7 @@ export {
    changePassword,
    getCurrentUser,
    updateAccountDetails,
-   updateUserAvatar
+   updateUserAvatar,
+   updateUserCoverImage
 
    };

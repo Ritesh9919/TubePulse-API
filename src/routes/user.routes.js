@@ -8,7 +8,8 @@ import {
     changePassword,
     getCurrentUser,
     updateAccountDetails,
-    updateUserAvatar
+    updateUserAvatar,
+    updateUserCoverImage
  } from '../controllers/user.controller.js';
 
 
@@ -33,6 +34,7 @@ router.post('/change-password', varifyJwt, changePassword );
 router.get('/current-user', varifyJwt, getCurrentUser);
 router.put('/update-account-details', varifyJwt, updateAccountDetails);
 router.put('/update-avatar', varifyJwt, upload.single('avatar'), updateUserAvatar);
+router.put('/update-cover-image', varifyJwt, upload.single('coverImage'), updateUserCoverImage);
 
 
 export default router;
