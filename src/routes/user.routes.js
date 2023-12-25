@@ -9,7 +9,8 @@ import {
     getCurrentUser,
     updateAccountDetails,
     updateUserAvatar,
-    updateUserCoverImage
+    updateUserCoverImage,
+    getUserChannelProfile
  } from '../controllers/user.controller.js';
 
 
@@ -32,9 +33,10 @@ router.get('/logout', varifyJwt, logoutUser);
 router.post('/refresh-token', refreshAccessToken);
 router.post('/change-password', varifyJwt, changePassword );
 router.get('/current-user', varifyJwt, getCurrentUser);
-router.put('/update-account-details', varifyJwt, updateAccountDetails);
-router.put('/update-avatar', varifyJwt, upload.single('avatar'), updateUserAvatar);
-router.put('/update-cover-image', varifyJwt, upload.single('coverImage'), updateUserCoverImage);
+router.patch('/update-account', varifyJwt, updateAccountDetails);
+router.patch('/avatar', varifyJwt, upload.single('avatar'), updateUserAvatar);
+router.patch('/cover-image', varifyJwt, upload.single('coverImage'), updateUserCoverImage);
+router.get('/c/:username', varifyJwt, getUserChannelProfile);
 
 
 export default router;
