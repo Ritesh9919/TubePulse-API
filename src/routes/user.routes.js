@@ -10,7 +10,8 @@ import {
     updateAccountDetails,
     updateUserAvatar,
     updateUserCoverImage,
-    getUserChannelProfile
+    getUserChannelProfile,
+    getWatchHistory
  } from '../controllers/user.controller.js';
 
 
@@ -37,6 +38,8 @@ router.patch('/update-account', varifyJwt, updateAccountDetails);
 router.patch('/avatar', varifyJwt, upload.single('avatar'), updateUserAvatar);
 router.patch('/cover-image', varifyJwt, upload.single('coverImage'), updateUserCoverImage);
 router.get('/c/:username', varifyJwt, getUserChannelProfile);
+router.get('/history', varifyJwt, getWatchHistory);
+
 
 
 export default router;
