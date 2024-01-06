@@ -2,21 +2,23 @@ import mongoose from "mongoose";
 
 const likeSchema = new mongoose.Schema(
   {
-    likeBy: {
+    likedBy: {
       type: mongoose.Types.ObjectId,
       ref: "User",
     },
 
-    likeable: {
-      type: mongoose.Types.ObjectId,
-      required: true,
-      refPath: "onModel",
+    video:{
+      type:mongoose.Types.ObjectId,
+      ref:'Video'
     },
-    onModel: {
-      type: String,
-      required: true,
-      enum: ["video", "comment", "tweet"],
+    comment:{
+      type:mongoose.Types.ObjectId,
+      ref:'Comment'
     },
+    tweet:{
+      type:mongoose.Types.ObjectId,
+      ref:'Tweet'
+    }
   },
   { timestamps: true },
 );
