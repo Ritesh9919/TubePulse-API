@@ -1,3 +1,4 @@
+import mongoose, {isValidObjectId} from 'mongoose';
 import {Tweet} from '../models/tweet.model.js';
 import {User} from '../models/user.model.js';
 import {ApiError} from '../utils/ApiError.js';
@@ -25,6 +26,10 @@ const createTweet = asyncHandler(async(req, res)=> {
 
 const getUserTweets = asyncHandler(async(req, res)=> {
    const {userId} = req.params;
+
+   if(!isValidObjectId(userId)) {
+    throw new ApiError(400, 'userId is invalid');
+   }
     
    const user = await User.findById(userId);
    if(!user) {
@@ -44,6 +49,10 @@ const getUserTweets = asyncHandler(async(req, res)=> {
 const updateTweet = asyncHandler(async(req, res)=> {
    const {tweetId} = req.params;
    const {content} = req.body;
+
+   if(!isValidObjectId(tweetId)) {
+      throw new ApiError(400, 'tweetId is invalid');
+   }
 
    if(!content) {
       throw new ApiError(400, 'Content is required');
@@ -71,6 +80,10 @@ const updateTweet = asyncHandler(async(req, res)=> {
 
 const deleteTweet = asyncHandler(async(req, res)=> {
     const {tweetId} = req.params;
+
+    if(!isValidObjectId(tweetId)) {
+      throw new ApiError(400, 'tweetId is invalid');
+   }
 
     const tweet = await Tweet.findById(tweetId);
 
