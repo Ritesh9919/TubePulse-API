@@ -9,7 +9,8 @@ import {
   publishVideo,
   getVideoById,
   updateVideo,
-  deleteVideo
+  deleteVideo,
+  togglePublishStatus
 }
 from '../controllers/video.controller.js';
 
@@ -39,6 +40,7 @@ router.put('/:videoId', varifyJwt, upload.fields(
     ]
 ), updateVideo);
 router.delete('/:videoId', varifyJwt, deleteVideo);
+router.post('/toggle', varifyJwt, togglePublishStatus);
 
 
 export default router;

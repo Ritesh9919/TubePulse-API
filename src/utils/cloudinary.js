@@ -6,9 +6,11 @@ const uploadOnCloudinary = async (localFilePath) => {
     if (!localFilePath) return null;
 
     const response = await cloudinary.uploader.upload(localFilePath, {
-      resource_type: "auto",
+      resource_type:"auto"
+    
+      
     });
-
+    fs.unlinkSync(localFilePath);
     return response;
   } catch (error) {
     fs.unlinkSync(localFilePath);
@@ -17,4 +19,18 @@ const uploadOnCloudinary = async (localFilePath) => {
 };
 
 
-export { uploadOnCloudinary };
+
+const deleteFileOnCloudinary = async (publicid) => {
+  try {
+    if (!publicid) return "Public id not found";
+    const deletresponse = await cloudinary.uploader.destroy(publicid, {
+      resource_type: "video",
+    });
+    return deletresponse;
+  } catch (e) {
+    return e.message;
+  }
+};
+
+
+export { uploadOnCloudinary, deleteFileOnCloudinary };
